@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+        <section class="recipe-detail">
+            <h2><%= recipe.name %></h2>
+            <div class="recipe-meta">
+                <span class="protein-type"><%= recipe.protein_type %></span>
+                <img src="<%= recipe.image_url %>" alt="<%= recipe.name %>" class="recipe-image">
+            </div>
+            
+            <div class="recipe-content">
+                <div class="ingredients">
+                    <h3>Ingredients</h3>
+                    <ul>
+                        <% ingredients.forEach(ingredient => { %>
+                            <li class="ingredient-item" data-id="<%= ingredient.id %>">
+                                <%= ingredient.name %>
+                                <div class="ingredient-tooltip">
+                                    <h4><%= ingredient.name %></h4>
+                                    <p><strong>Origin:</strong> <%= ingredient.origin %></p>
+                                    <p><strong>Safety Tip:</strong> <%= ingredient.safety_tip %></p>
+                                    <p><strong>Fun Fact:</strong> <%= ingredient.interesting_fact %></p>
+                                </div>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+                
+                <div class="instructions">
+                    <h3>Instructions</h3>
+                    <div class="steps">
+                        <% const steps = recipe.instructions.split('\n'); %>
+                        <% steps.forEach((step, index) => { %>
+                            <% if (step.trim() !== '') { %>
+                                <p><span class="step-number"><%= index + 1 %></span> <%= step %></p>
+                            <% } %>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </section>
+<%- include('partials/footer') %>

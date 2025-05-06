@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+        <section class="recipe-list">
+            <h2>Recipe Collection</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search recipes...">
+                <button id="searchButton">Search</button>
+            </div>
+            
+            <% for (const proteinType in recipesByProtein) { %>
+                <div class="protein-section">
+                    <h3 class="protein-header"><%= proteinType %></h3>
+                    <div class="protein-content">
+                        <div class="recipes-grid">
+                            <% recipesByProtein[proteinType].forEach(recipe => { %>
+                                <div class="recipe-card">
+                                    <img src="<%= recipe.image_url %>" alt="<%= recipe.name %>">
+                                    <h4><a href="/recipe/<%= recipe.id %>"><%= recipe.name %></a></h4>
+                                    <p><%= recipe.description %></p>
+                                    <p><strong>Ingredients:</strong> <%= recipe.ingredients %></p>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </section>
+<%- include('partials/footer') %>
